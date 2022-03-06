@@ -132,7 +132,7 @@ public class Home {
     }
 
     public static void goToMenuConfirmation(){
-        System.out.println("Do you want to goto homepage (1. Yes/ No)?");
+        System.out.println("Do you want to goto homepage (1. Yes/2. No)?");
         int userInput = Integer.parseInt(scannerInput.nextLine());
         if(userInput == 1){
             homeMenu();
