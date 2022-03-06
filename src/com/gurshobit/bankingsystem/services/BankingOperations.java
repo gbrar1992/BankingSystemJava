@@ -4,6 +4,7 @@ import com.gurshobit.bankingsystem.models.Customer;
 import com.gurshobit.bankingsystem.models.Transaction;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class BankingOperations {
     public boolean deposit(double amount, Customer customer){
@@ -77,7 +78,7 @@ public class BankingOperations {
     public void performTransaction(double amount, Customer customer, double openingBalance, double closingBalance, boolean transactionType) {
         ArrayList<Transaction> customerTransactions = customer.getTransactions();
         Transaction transaction = new Transaction();
-        transaction.setId(customerTransactions.size() + 1);
+        transaction.setId(UUID.randomUUID());
         transaction.setAmount(amount);
         transaction.setAccountNumber(customer.getAccountNumber());
         transaction.setTransactionType(transactionType);

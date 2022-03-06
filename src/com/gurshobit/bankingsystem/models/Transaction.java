@@ -1,21 +1,22 @@
 package com.gurshobit.bankingsystem.models;
 
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Transaction {
     private static final AtomicLong count = new AtomicLong(1);
-    private long id;
+    private UUID id;
     private String accountNumber;
     private Boolean transactionType;
     private double amount;
     private double openingBalance;
     private double closingBalance;
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
