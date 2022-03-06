@@ -3,6 +3,7 @@ package com.gurshobit.bankingsystem;
 import com.gurshobit.bankingsystem.data.CustomersDatabase;
 import com.gurshobit.bankingsystem.models.Customer;
 import com.gurshobit.bankingsystem.services.BankingOperations;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -104,8 +105,18 @@ public class Home {
                             double transferAmount = Double.parseDouble(scannerInput.nextLine());
                             Long generatedOtp = bankingOperations.generateOtp();
                             System.out.println("OTP generated for transaction is "+generatedOtp);
-                            System.out.println("Enter OTP for transaction: ");
-                            Long otpInput = Long.parseLong(scannerInput.nextLine());
+                            Long otpInput;
+                            Boolean firstExecution = true;
+                            do {
+                                if(!firstExecution){
+                                    System.out.println("Invalid OTP!");
+                                }
+                                if(firstExecution){
+                                    firstExecution = false;
+                                }
+                                System.out.println("Enter OTP for transaction: ");
+                                otpInput = Long.parseLong(scannerInput.nextLine());
+                            } while(!generatedOtp.toString().equals(otpInput.toString()));
                             if(generatedOtp.toString().equals(otpInput.toString())){
                                 Boolean operationStatus = bankingOperations.transfer(transferAmount,loggedInCustomer,otherCustomer);
                                 if(operationStatus){

@@ -6,7 +6,7 @@ public class BankingOperations {
     public boolean deposit(double amount, Customer customer){
         if(amount > 0){
             customer.setBalanceAmount(customer.getBalanceAmount() + amount);
-            System.out.println("Amount Successfully Deposited. Current Balance is " +customer.getBalanceAmount());
+            System.out.println("Amount Successfully Deposited. Current Balance is Rs. " +customer.getBalanceAmount());
             return true;
         } else {
             System.out.println("Invalid Amount");
@@ -18,7 +18,7 @@ public class BankingOperations {
         if(amount > 0){
             if(customer.getBalanceAmount() >= amount){
                 customer.setBalanceAmount(customer.getBalanceAmount() - amount);
-                System.out.println("Amount Withdrawal Successful. Balance is " +customer.getBalanceAmount());
+                System.out.println("Amount Withdrawal Successful. Balance is Rs. " +customer.getBalanceAmount());
                 return true;
             } else {
                 System.out.println("Low Balance");
@@ -51,7 +51,7 @@ public class BankingOperations {
     }
 
     public long generateOtp(){
-        return (long) (Math.random() * 999999 + 100000);
+        return (long) (Math.random() * 99999 + 100000);
     }
 
 }
