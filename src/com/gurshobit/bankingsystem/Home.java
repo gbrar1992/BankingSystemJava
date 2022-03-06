@@ -3,7 +3,6 @@ package com.gurshobit.bankingsystem;
 import com.gurshobit.bankingsystem.data.CustomersDatabase;
 import com.gurshobit.bankingsystem.models.Customer;
 import com.gurshobit.bankingsystem.services.BankingOperations;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.HashMap;
 import java.util.Scanner;
