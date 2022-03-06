@@ -51,43 +51,44 @@ public class Home {
     public static void homeMenu(){
         do {
             System.out.println("----------------------");
-            System.out.println("Hello, "+loggedInCustomer.getAccountHolderName()+"!");
+            System.out.println("Hello, " + loggedInCustomer.getAccountHolderName() + "!");
             System.out.println("----------------------");
             System.out.println("Select from Options Below:");
             System.out.println("1. Check Balance");
             System.out.println("2. Deposit");
             System.out.println("3. Withdrawal");
             System.out.println("4. Transfer");
-            System.out.println("5. Logout");
+            System.out.println("5. My Transactions");
+            System.out.println("6. Logout");
             userChoice = Integer.parseInt(scannerInput.nextLine());
 
-            switch (userChoice){
+            switch (userChoice) {
                 case 1:
-                    System.out.println("Your Account Balance is Rs. "+loggedInCustomer.getBalanceAmount());
+                    System.out.println("Your Account Balance is Rs. " + loggedInCustomer.getBalanceAmount());
                     goToMenuConfirmation();
                     break;
                 case 2:
-                    System.out.println("Enter amount to deposit into your account "+loggedInCustomer.getAccountNumber()+": ");
+                    System.out.println("Enter amount to deposit into your account " + loggedInCustomer.getAccountNumber() + ": ");
                     try {
                         double depositAmount = Double.parseDouble(scannerInput.nextLine());
-                        Boolean operationStatus = bankingOperations.deposit(depositAmount,loggedInCustomer);
-                        if(operationStatus){
-                            customerHashMap.replace(userAccountNumber,loggedInCustomer);
+                        Boolean operationStatus = bankingOperations.deposit(depositAmount, loggedInCustomer);
+                        if (operationStatus) {
+                            customerHashMap.replace(userAccountNumber, loggedInCustomer);
                         }
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         System.out.println("Invalid Amount");
                     }
                     goToMenuConfirmation();
                     break;
                 case 3:
-                    System.out.println("Enter amount to withdraw from your account "+loggedInCustomer.getAccountNumber()+": ");
+                    System.out.println("Enter amount to withdraw from your account " + loggedInCustomer.getAccountNumber() + ": ");
                     try {
                         double depositAmount = Double.parseDouble(scannerInput.nextLine());
-                        Boolean  operationStatus = bankingOperations.withdrawal(depositAmount,loggedInCustomer);
-                        if(operationStatus){
-                            customerHashMap.replace(userAccountNumber,loggedInCustomer);
+                        Boolean operationStatus = bankingOperations.withdrawal(depositAmount, loggedInCustomer);
+                        if (operationStatus) {
+                            customerHashMap.replace(userAccountNumber, loggedInCustomer);
                         }
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         System.out.println("Invalid Amount");
                     }
                     goToMenuConfirmation();
@@ -96,46 +97,49 @@ public class Home {
                     System.out.println("Enter the account number you want to transfer funds: ");
                     String otherUserAccountNumber = scannerInput.nextLine();
                     Customer otherCustomer = customerHashMap.get(otherUserAccountNumber);
-                    if(otherCustomer == null){
+                    if (otherCustomer == null) {
                         System.out.println("Invalid Customer Account Number");
                     } else {
-                        System.out.println("Enter the amount you want to transfer to "+otherCustomer.getAccountHolderName()+": ");
+                        System.out.println("Enter the amount you want to transfer to " + otherCustomer.getAccountHolderName() + ": ");
                         try {
                             double transferAmount = Double.parseDouble(scannerInput.nextLine());
                             Long generatedOtp = bankingOperations.generateOtp();
-                            System.out.println("OTP generated for transaction is "+generatedOtp);
+                            System.out.println("OTP generated for transaction is " + generatedOtp);
                             Long otpInput;
                             Boolean firstExecution = true;
                             do {
-                                if(!firstExecution){
+                                if (!firstExecution) {
                                     System.out.println("Invalid OTP!");
                                 }
-                                if(firstExecution){
+                                if (firstExecution) {
                                     firstExecution = false;
                                 }
                                 System.out.println("Enter OTP for transaction: ");
                                 otpInput = Long.parseLong(scannerInput.nextLine());
-                            } while(!generatedOtp.toString().equals(otpInput.toString()));
+                            } while (!generatedOtp.toString().equals(otpInput.toString()));
 
-                            Boolean operationStatus = bankingOperations.transfer(transferAmount,loggedInCustomer,otherCustomer);
-                            if(operationStatus){
-                                customerHashMap.replace(userAccountNumber,loggedInCustomer);
-                                customerHashMap.replace(otherUserAccountNumber,otherCustomer);
+                            Boolean operationStatus = bankingOperations.transfer(transferAmount, loggedInCustomer, otherCustomer);
+                            if (operationStatus) {
+                                customerHashMap.replace(userAccountNumber, loggedInCustomer);
+                                customerHashMap.replace(otherUserAccountNumber, otherCustomer);
                             }
-                        } catch (Exception e){
+                        } catch (Exception e) {
                             System.out.println("Invalid Amount");
                         }
                     }
                     goToMenuConfirmation();
                     break;
                 case 5:
+                    System.out.println(loggedInCustomer.getTransactions());
+                    break;
+                case 6:
                     System.out.println("Thank you for banking with us!!");
                     break;
                 default:
                     break;
             }
 
-        } while (userChoice != 5);
+        } while (userChoice != 6);
     }
 
     public static void goToMenuConfirmation(){
