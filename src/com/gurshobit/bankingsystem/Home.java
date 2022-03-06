@@ -117,14 +117,11 @@ public class Home {
                                 System.out.println("Enter OTP for transaction: ");
                                 otpInput = Long.parseLong(scannerInput.nextLine());
                             } while(!generatedOtp.toString().equals(otpInput.toString()));
-                            if(generatedOtp.toString().equals(otpInput.toString())){
-                                Boolean operationStatus = bankingOperations.transfer(transferAmount,loggedInCustomer,otherCustomer);
-                                if(operationStatus){
-                                    customerHashMap.replace(userAccountNumber,loggedInCustomer);
-                                    customerHashMap.replace(otherUserAccountNumber,otherCustomer);
-                                }
-                            } else {
-                                System.out.println("Invalid OTP!");
+
+                            Boolean operationStatus = bankingOperations.transfer(transferAmount,loggedInCustomer,otherCustomer);
+                            if(operationStatus){
+                                customerHashMap.replace(userAccountNumber,loggedInCustomer);
+                                customerHashMap.replace(otherUserAccountNumber,otherCustomer);
                             }
                         } catch (Exception e){
                             System.out.println("Invalid Amount");
